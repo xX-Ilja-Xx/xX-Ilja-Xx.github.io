@@ -1,0 +1,513 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Tahoma", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.xp-body {
+  background: radial-gradient(circle at top left, #4a8fe7, #1b3f8b 40%, #0a1c52);
+  color: #000;
+}
+
+/* Desktop + icons */
+.desktop {
+  position: relative;
+  height: calc(100vh - 32px);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.desktop-icons {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  width: 80px;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000;
+  cursor: default;
+  user-select: none;
+}
+
+.icon:hover span {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.icon-image {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 4px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Profile: avatar icon */
+.profile-icon {
+  background: radial-gradient(circle at 30% 20%, #ffe6e6 0, #ffd36b 40%, #f59e0b 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+.profile-icon::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 40%;
+  background: #ffe6c7;
+  border-radius: 50%;
+}
+.profile-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 38%;
+  background: linear-gradient(180deg, #ffc7c7, #f4a261);
+  border-radius: 50% 50% 18% 18%;
+}
+
+/* Projects: folder icon */
+.folder-icon {
+  position: relative;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fff3cd, #ffca28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.folder-icon::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 60%;
+  height: 26%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, #ffe082, #ffca28);
+}
+.folder-icon::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 14px;
+  bottom: 6px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fff8e1, #ffb300);
+}
+
+/* Contact: envelope icon */
+.mail-icon {
+  position: relative;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 2px solid #1e88e5;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.mail-icon::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, transparent 47%, #1e88e5 49%, #1e88e5 51%, transparent 53%),
+    linear-gradient(225deg, transparent 47%, #1e88e5 49%, #1e88e5 51%, transparent 53%);
+  box-shadow: 0 0 0 1px #1e88e5 inset;
+}
+.mail-icon::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 8px;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(227, 242, 253, 0.95), rgba(227, 242, 253, 0));
+}
+
+/* Windows */
+.window {
+  position: absolute;
+  top: 70px;
+  left: 130px;
+  width: 360px;
+  background: #ece9d8;
+  border: 2px solid #003c74;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.window.active {
+  z-index: 999;
+}
+
+.window-titlebar {
+  height: 26px;
+  background: linear-gradient(to right, #0a246a, #3a6ea5);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 0 8px;
+  cursor: move;
+}
+
+.window-title {
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.window-controls button {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ffffff;
+  background: #d4d0c8;
+  font-size: 11px;
+  line-height: 14px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.window-controls button:hover {
+  background: #f1efe7;
+}
+
+.window-content {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.window-content h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.window-content h3 {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+/* Resize handle */
+.window-resizer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  cursor: se-resize;
+  background:
+    linear-gradient(135deg, transparent 0, transparent 40%, rgba(0, 0, 0, 0.25) 40%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+/* Lists + projects */
+.xp-list {
+  margin: 6px 0 0 16px;
+  padding: 0;
+}
+
+.xp-list li {
+  margin-bottom: 4px;
+}
+
+.project-item {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+/* Taskbar + Start button + clock */
+.taskbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(to top, #245edb, #3c8cf8);
+  border-top: 1px solid #0b2f6a;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.taskbar-windows {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.taskbar-clock {
+  margin-left: auto;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 2px 10px; /* slightly more padding for the box */
+  white-space: nowrap;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(255, 255, 255, 0.1));
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.start-button {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to top, #0a7f22, #5ccf6a);
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 2px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  border: 1px solid #0a4f19;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.start-button.active {
+  filter: brightness(0.9);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.start-button:hover {
+  filter: brightness(1.1);
+}
+
+.start-logo {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #0a7f22);
+  margin-right: 4px;
+}
+
+/* Taskbar window buttons */
+.taskbar-button {
+  min-width: 120px;
+  max-width: 200px;
+  height: 24px;
+  background: #3c7df0;
+  border: 1px solid #1b4f9c;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 2px 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskbar-button.inactive {
+  background: #6b8fdc;
+}
+
+.taskbar-button:hover {
+  filter: brightness(1.1);
+}
+
+/* Start menu */
+.start-menu {
+  position: fixed;
+  left: 0;
+  bottom: 32px;
+  width: 220px;
+  background: #f0f0f0;
+  border: 2px solid #0b2f6a;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+  display: none;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.start-menu.visible {
+  display: block;
+}
+
+.start-menu-header {
+  background: linear-gradient(to right, #0a246a, #3a6ea5);
+  color: #ffffff;
+  padding: 6px 8px;
+  font-weight: bold;
+}
+
+.start-menu-item {
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.start-menu-item:hover {
+  background: #316ac5;
+  color: #ffffff;
+}
+
+/* NEW: special styling for red "Shut Down..." button */
+#start-shutdown {
+  background: linear-gradient(to right, #c62828, #e53935);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+#start-shutdown:hover {
+  background: linear-gradient(to right, #b71c1c, #d32f2f);
+  color: #ffffff;
+}
+
+.start-menu-separator {
+  margin: 4px 0;
+  border: none;
+  border-top: 1px solid #c0c0c0;
+}
+
+/* Weather window */
+.weather-summary {
+  background: linear-gradient(180deg, #e8f1ff, #d4e2ff);
+  border: 1px solid #9bb6e4;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 6px 0 10px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-right: 76px; /* extra room for badged emoji */
+}
+
+.weather-location {
+  font-size: 12px;
+  color: #2f4c8b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weather-temp {
+  font-size: 26px;
+  font-weight: bold;
+  color: #0a246a;
+}
+
+.weather-condition {
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.weather-meta {
+  font-size: 12px;
+  color: #2f4c8b;
+  margin-top: 4px;
+}
+
+.weather-emoji {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  opacity: 0.95;
+  text-shadow:
+    0 1px 0 #ffffff,
+    0 2px 4px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 6px 10px;
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(-52%); }
+}
+
+.weather-forecast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.forecast-item {
+  background: #f6f7fb;
+  border: 1px solid #c9d5ef;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.forecast-day {
+  font-weight: bold;
+  color: #0a246a;
+}
+
+.forecast-temps {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.forecast-note {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #2f4c8b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.weather-note {
+  font-size: 12px;
+  color: #444;
+  margin: 4px 0 0;
+}
+
+/* Responsive: windows on small screens */
+@media (max-width: 600px) {
+  .window {
+    width: 90%;
+    left: 5%;
+    top: 60px;
+  }
+}

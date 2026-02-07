@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ilja |  Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="xp-body">
+  <!-- Desktop -->
+  <div class="desktop">
+
+    <!-- Desktop icons -->
+    <div class="desktop-icons">
+      <div class="icon" data-window="profile-window">
+        <div class="icon-image profile-icon"></div>
+        <span>Profile</span>
+      </div>
+      <div class="icon" data-window="projects-window">
+        <div class="icon-image folder-icon"></div>
+        <span>Projects</span>
+      </div>
+      <div class="icon" data-window="contact-window">
+        <div class="icon-image mail-icon"></div>
+        <span>Contact</span>
+      </div>
+    </div>
+
+    <!-- Profile window -->
+    <div class="window" id="profile-window">
+      <div class="window-titlebar">
+        <span class="window-title">Profile - Ilja</span>
+        <div class="window-controls">
+          <button class="btn-minimize">_</button>
+          <button class="btn-close">X</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <h2>Hi, I’m Ilja</h2>
+        <p>
+          I’m a developer who loves building things and experimenting with code.
+          I enjoy learning new technologies and creating small projects to explore ideas.
+        </p>
+        <p>
+          You can find some of my work in the <strong>Projects</strong> window,
+          and if you’d like to reach out, open the <strong>Contact</strong> window.
+        </p>
+        <h3>Skills</h3>
+        <ul class="xp-list">
+          <li>HTML, CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Projects window -->
+    <div class="window" id="projects-window">
+      <div class="window-titlebar">
+        <span class="window-title">Projects</span>
+        <div class="window-controls">
+          <button class="btn-minimize">_</button>
+          <button class="btn-close">X</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <h2>Projects</h2>
+        <p>Some things I’ve worked on:</p>
+
+        <div class="project-item">
+          <h3>Project Title 1</h3>
+          <p>
+            Short description of what this project does and what you used to build it.
+          </p>
+          <p>
+            <strong>Tech:</strong> HTML, CSS
+          </p>
+          <p>
+            <a href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          </p>
+        </div>
+
+        <div class="project-item">
+          <h3>Project Title 2</h3>
+          <p>
+            Another small project. Explain what it is and why you built it.
+          </p>
+          <p>
+            <strong>Tech:</strong> JavaScript
+          </p>
+          <p>
+            <a href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather window -->
+    <div class="window" id="weather-window">
+      <div class="window-titlebar">
+        <span class="window-title">Weather</span>
+        <div class="window-controls">
+          <button class="btn-minimize">_</button>
+          <button class="btn-close">X</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <h2>Local Weather</h2>
+        <div class="weather-summary">
+          <div class="weather-location">Helsinki, FI</div>
+          <div class="weather-temp" id="weather-temp">--°C</div>
+          <div class="weather-condition" id="weather-condition">Loading...</div>
+          <div class="weather-meta" id="weather-meta"></div>
+          <div class="weather-emoji" id="weather-emoji">⛅</div>
+        </div>
+
+        <div class="weather-forecast" id="weather-forecast"></div>
+
+        <p class="weather-note" id="weather-note">Fetching live data from Open-Meteo...</p>
+      </div>
+    </div>
+
+    <!-- Contact window -->
+    <div class="window" id="contact-window">
+      <div class="window-titlebar">
+        <span class="window-title">Contact</span>
+        <div class="window-controls">
+          <button class="btn-minimize">_</button>
+          <button class="btn-close">X</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <h2>Contact</h2>
+        <p>
+          Want to get in touch? Use any of the options below:
+        </p>
+        <ul class="xp-list">
+          <li>
+            <strong>Email:</strong>
+            <a href="mailto:youremail@example.com">youremail@example.com</a>
+          </li>
+          <li>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/xX-Ilja-Xx" target="_blank" rel="noopener noreferrer">
+              github.com/xX-Ilja-Xx
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="start-button">
+      <span class="start-logo"></span>
+      <span class="start-text">Start</span>
+    </div>
+
+    <!-- Start menu -->
+    <div class="start-menu" id="start-menu">
+      <div class="start-menu-header">Ilja OS</div>
+      <!-- NEW: program-like entries -->
+      <button class="start-menu-item" id="start-profile">Profile</button>
+      <button class="start-menu-item" id="start-projects">Projects</button>
+      <button class="start-menu-item" id="start-contact">Contact</button>
+      <button class="start-menu-item" id="start-weather">Weather</button>
+      <hr class="start-menu-separator" />
+      <button class="start-menu-item" id="start-shutdown">Shut Down...</button>
+    </div>
+
+    <div class="taskbar-windows" id="taskbar-windows"></div>
+    <div class="taskbar-clock" id="taskbar-clock">--</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
