@@ -40,6 +40,12 @@ body {
   user-select: none;
 }
 
+.icon span {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 .icon:hover span {
   background: rgba(0, 0, 0, 0.3);
 }

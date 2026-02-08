@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const desktopArea =
     document.querySelector(".desktop-icons") || document.querySelector(".desktop");
 
+  function getPoint(evt) {
+    if (evt.touches && evt.touches[0]) {
+      return { x: evt.touches[0].clientX, y: evt.touches[0].clientY };
+    }
+    return { x: evt.clientX, y: evt.clientY };
+  }
+
   // NEW: Start button + menu elements
   const startButton = document.querySelector(".start-button");
   const startMenu = document.getElementById("start-menu");
@@ -214,6 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
     icon.addEventListener("dblclick", () => {
       const targetId = icon.dataset.window;
       openWindowById(targetId); // CHANGED: use helper
+      if (targetId === "weather-window") {
+        loadWeather();
+      }
     });
   });
 
@@ -259,6 +269,17 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.userSelect = "none";
     });
 
+    titlebar.addEventListener("touchstart", (e) => {
+      const point = getPoint(e);
+      isDragging = true;
+      const rect = win.getBoundingClientRect();
+      offsetX = point.x - rect.left;
+      offsetY = point.y - rect.top;
+      activateWindow(win);
+      document.body.style.userSelect = "none";
+      e.preventDefault();
+    }, { passive: false });
+
     document.addEventListener("mousemove", (e) => {
       if (!isDragging) return;
       const x = e.clientX - offsetX;
@@ -271,6 +292,23 @@ document.addEventListener("DOMContentLoaded", () => {
       isDragging = false;
       document.body.style.userSelect = "";
     });
+
+    document.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      const point = getPoint(e);
+      const x = point.x - offsetX;
+      const y = point.y - offsetY;
+      win.style.left = Math.max(0, Math.min(window.innerWidth - 100, x)) + "px";
+      win.style.top = Math.max(0, Math.min(window.innerHeight - 80, y)) + "px";
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener("touchend", () => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.style.userSelect = "";
+      }
+    }, { passive: false });
 
     // NEW: add bottom-right resize handle to this window
     const resizer = document.createElement("div");
@@ -290,12 +328,29 @@ document.addEventListener("DOMContentLoaded", () => {
       activateWindow(win);
       document.body.style.userSelect = "none";
     });
+
+    resizer.addEventListener("touchstart", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const point = getPoint(e);
+      isResizing = true;
+      resizeWin = win;
+      const rect = win.getBoundingClientRect();
+      startWidth = rect.width;
+      startHeight = rect.height;
+      resizeStartX = point.x;
+      resizeStartY = point.y;
+      activateWindow(win);
+      document.body.style.userSelect = "none";
+    }, { passive: false });
   });
 
   // NEW: state for draggable desktop icons
   let activeIcon = null;
   let iconOffsetX = 0;
   let iconOffsetY = 0;
+  let iconTouchStart = null;
+  let iconTouchMoved = false;
 
   // NEW: make desktop icons draggable within the desktop area
   icons.forEach((icon, index) => {
@@ -319,6 +374,18 @@ document.addEventListener("DOMContentLoaded", () => {
       iconOffsetY = e.clientY - rect.top;
       document.body.style.userSelect = "none";
     });
+
+    icon.addEventListener("touchstart", (e) => {
+      const point = getPoint(e);
+      iconTouchStart = point;
+      iconTouchMoved = false;
+      activeIcon = icon;
+      const rect = icon.getBoundingClientRect();
+      iconOffsetX = point.x - rect.left;
+      iconOffsetY = point.y - rect.top;
+      document.body.style.userSelect = "none";
+      e.preventDefault();
+    }, { passive: false });
   });
 
   document.addEventListener("mousemove", (e) => {
@@ -337,6 +404,31 @@ document.addEventListener("DOMContentLoaded", () => {
     activeIcon.style.left = `${newLeft}px`;
     activeIcon.style.top = `${newTop}px`;
   });
+
+  document.addEventListener("touchmove", (e) => {
+    if (!activeIcon || !desktopArea) return;
+    const point = getPoint(e);
+    if (iconTouchStart && !iconTouchMoved) {
+      const dx = point.x - iconTouchStart.x;
+      const dy = point.y - iconTouchStart.y;
+      if (Math.hypot(dx, dy) > 6) {
+        iconTouchMoved = true;
+      }
+    }
+
+    const desktopRect = desktopArea.getBoundingClientRect();
+    const iconRect = activeIcon.getBoundingClientRect();
+
+    let newLeft = point.x - desktopRect.left - iconOffsetX;
+    let newTop = point.y - desktopRect.top - iconOffsetY;
+
+    newLeft = Math.max(0, Math.min(desktopRect.width - iconRect.width, newLeft));
+    newTop = Math.max(0, Math.min(desktopRect.height - iconRect.height, newTop));
+
+    activeIcon.style.left = `${newLeft}px`;
+    activeIcon.style.top = `${newTop}px`;
+    e.preventDefault();
+  }, { passive: false });
 
   // NEW: state for resizing windows
   let isResizing = false;
@@ -363,6 +455,23 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeWin.style.height = `${newHeight}px`;
   });
 
+  document.addEventListener("touchmove", (e) => {
+    if (!isResizing || !resizeWin) return;
+    const point = getPoint(e);
+    const dx = point.x - resizeStartX;
+    const dy = point.y - resizeStartY;
+
+    const minWidth = 220;
+    const minHeight = 120;
+
+    const newWidth = Math.max(minWidth, startWidth + dx);
+    const newHeight = Math.max(minHeight, startHeight + dy);
+
+    resizeWin.style.width = `${newWidth}px`;
+    resizeWin.style.height = `${newHeight}px`;
+    e.preventDefault();
+  }, { passive: false });
+
   document.addEventListener("mouseup", () => {
     if (activeIcon) {
       activeIcon = null;
@@ -375,6 +484,27 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.userSelect = "";
     }
   });
+
+  document.addEventListener("touchend", () => {
+    if (activeIcon) {
+      if (!iconTouchMoved) {
+        const targetId = activeIcon.dataset.window;
+        openWindowById(targetId);
+        if (targetId === "weather-window") {
+          loadWeather();
+        }
+      }
+      activeIcon = null;
+      iconTouchStart = null;
+      iconTouchMoved = false;
+      document.body.style.userSelect = "";
+    }
+    if (isResizing) {
+      isResizing = false;
+      resizeWin = null;
+      document.body.style.userSelect = "";
+    }
+  }, { passive: false });
 
   // NEW: small helper to close the Start menu
   function closeStartMenu() {
