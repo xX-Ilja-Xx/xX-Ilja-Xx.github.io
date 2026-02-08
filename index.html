@@ -28,6 +28,10 @@
         <div class="icon-image weather-icon"></div>
         <span>Weather</span>
       </div>
+      <div class="icon" data-window="cat-window">
+        <div class="icon-image cat-icon"></div>
+        <span>Cat Site</span>
+      </div>
     </div>
 
     <!-- Profile window -->
@@ -68,33 +72,73 @@
           <button class="btn-close">X</button>
         </div>
       </div>
-      <div class="window-content">
+      <div class="window-content projects-content">
         <h2>Projects</h2>
-        <p>Some things I’ve worked on:</p>
+        <p>Selected work:</p>
 
         <div class="project-item">
-          <h3>Project Title 1</h3>
+          <h3>AI Chatbot Rollout (Client)</h3>
           <p>
-            Short description of what this project does and what you used to build it.
+            Haaga-Helia, Helsinki - Spring 2025. Designed conversation flows and logic, kept brand voice aligned, tested and documented a support chatbot to improve self-service.
           </p>
           <p>
-            <strong>Tech:</strong> HTML, CSS
+            <strong>Collaboration:</strong> Client workshops, iterative rounds; roles covered logic, copy, and testing.
           </p>
           <p>
-            <a href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            <strong>Result:</strong> MVP made production-ready on schedule with clearer answers and handover docs.
+          </p>
+          <p>
+            <strong>Tech:</strong> AI tools, dialogue design, testing, documentation
           </p>
         </div>
 
         <div class="project-item">
-          <h3>Project Title 2</h3>
+          <h3>International IT Seminar (AI/IoT)</h3>
           <p>
-            Another small project. Explain what it is and why you built it.
+            Madrid & Haaga-Helia - Spring 2025. Represented Haaga-Helia at the 17th IT seminar; topics covered AI and IoT with hands-on troubleshooting.
           </p>
           <p>
-            <strong>Tech:</strong> JavaScript
+            <strong>Contribution:</strong> Used AI tools to analyze and fix code; guided Swiss and Spanish teams through testing.
           </p>
           <p>
-            <a href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            <strong>Result:</strong> Demo completed on time with clear troubleshooting notes and positive feedback on communication.
+          </p>
+          <p>
+            <strong>Tech:</strong> AI-assisted debugging, IoT devices and sensors, testing, documentation
+          </p>
+        </div>
+
+        <div class="project-item">
+          <h3>Website Refresh (Client)</h3>
+          <p>
+            Haaga-Helia, Helsinki - Spring 2024. Reworked a WordPress site structure, visuals, and usability.
+          </p>
+          <p>
+            <strong>Contribution:</strong> Improved UX (structure, navigation, content) and optimized performance and functionality.
+          </p>
+          <p>
+            <strong>Collaboration:</strong> Worked pairwise with design using an agile flow with backlog and reviews, releasing iteratively.
+          </p>
+          <p>
+            <strong>Result:</strong> Clearer structure and findability; approved and launched by the client.
+          </p>
+          <p>
+            <strong>Tech:</strong> WordPress, UX principles, HTML/CSS, performance and usability tuning
+          </p>
+        </div>
+
+        <div class="project-item">
+          <h3>KissaSivust0 GitHub Pages 😺</h3>
+          <p>
+            Final course project where we learned APIs, JSON, and fetch flow while building a small cat-themed site hosted on GitHub Pages.
+          </p>
+          <p>
+            <strong>Tech:</strong> HTML, CSS, GitHub Pages
+          </p>
+          <p>
+            <a href="https://github.com/xX-Ilja-Xx/KissaSivust0.github.io" target="_blank" rel="noopener noreferrer">View code on GitHub</a>
+            <br />
+            <a href="https://xx-ilja-xx.github.io/KissaSivust0.github.io/" target="_blank" rel="noopener noreferrer">View live site</a>
           </p>
         </div>
       </div>
@@ -122,6 +166,27 @@
         <div class="weather-forecast" id="weather-forecast"></div>
 
         <p class="weather-note" id="weather-note">Fetching live data from Open-Meteo...</p>
+      </div>
+    </div>
+
+    <!-- Cat site window (embedded) -->
+    <div class="window" id="cat-window">
+      <div class="window-titlebar">
+        <span class="window-title">Cat Site (embedded)</span>
+        <div class="window-controls">
+          <button class="btn-minimize">_</button>
+          <button class="btn-close">X</button>
+        </div>
+      </div>
+      <div class="window-content cat-window-content">
+        <h2>Cat Site</h2>
+        <p class="cat-warning">Embedded view of the KissaSivust0 project (GitHub Pages). Loading this preview may affect performance on slower devices.</p>
+        <p><a href="https://xx-ilja-xx.github.io/KissaSivust0.github.io/" target="_blank" rel="noopener noreferrer">Open in new tab</a></p>
+        <iframe
+          class="cat-iframe"
+          src="https://xx-ilja-xx.github.io/KissaSivust0.github.io/"
+          title="Cat site preview"
+        ></iframe>
       </div>
     </div>
 
